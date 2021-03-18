@@ -69,7 +69,7 @@ function onScrollByPressBtn(e) {
         if (curentIndex === 0) {
             curentIndex = images.length - 1;
         } else {
-            curentIndex = curentIndex - 1;
+            curentIndex -= 1;
         }
         changeImages.src = images[curentIndex].original;
     } 
@@ -78,7 +78,7 @@ function onScrollByPressBtn(e) {
         if (curentIndex +1 > images.length - 1) {
             curentIndex = 0;
         } else {
-            curentIndex = curentIndex + 1;
+            curentIndex += 1;
         }
         changeImages.src = images[curentIndex].original;
     };
