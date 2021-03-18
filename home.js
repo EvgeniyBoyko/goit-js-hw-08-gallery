@@ -8,10 +8,12 @@ const cardsMarkup = createsPortfolioCardsMarkup(images);
 portfolioContainer.insertAdjacentHTML('beforeend', cardsMarkup);
 portfolioContainer.addEventListener('click', onClickForModalOpen);
 parentPortfolioCard.addEventListener('click', onClickForModalClose);
-parentPortfolioCard.addEventListener('keydown', onScrollByPressBtn);
+
+let curentIndex = null;
+
 
 function createsPortfolioCardsMarkup(images) {
-    return images.map(({ preview, original, description }) => {
+    return images.map(({ preview, original, description }, index) => {
         return `<li class="gallery__item">
         <a class="gallery__link"
         href="${original}">
@@ -19,6 +21,7 @@ function createsPortfolioCardsMarkup(images) {
         class="gallery__image"
         src="${preview}"
         data-source="${original}"
+        data-index="${index}"
         alt="${description}"/> 
         </a>
         </li>`;
@@ -30,10 +33,13 @@ function onClickForModalClose(e) {
         parentPortfolioCard.classList.remove('is-open');
         clearLines()
     }
+    
+    window.removeEventListener('keydown', onScrollByPressBtn);
 };
 
 function onClickForModalOpen(e) {
     e.preventDefault();
+    window.addEventListener('keydown', onScrollByPressBtn);
     const targetClass = e.target.nodeName === 'IMG';
     if (!targetClass) {
         return;
@@ -42,14 +48,11 @@ function onClickForModalOpen(e) {
     const activeTarget = e.target.dataset.source;
     changeImages.src = activeTarget;
     changeImages.alt = activeTarget.alt;
+    curentIndex = +e.target.dataset.index;
 };
+console.log(curentIndex);
 
-window.addEventListener("keydown", function (e) {
-    if (e.code === 'Escape') {
-        parentPortfolioCard.classList.remove('is-open');
-        clearLines()
-    }
-});
+
 
 function clearLines() {
     changeImages.src = '';
@@ -57,12 +60,30 @@ function clearLines() {
 };
 
 function onScrollByPressBtn(e) {
-    // e.preventDefault();
-    if (parentPortfolioCard.classList.contains('is-open')) {
-        const scrollLeft = e.code === 'ArrowLeft';
-        scrollLeft
-    }
+    if (e.code === 'Escape') {
+        parentPortfolioCard.classList.remove('is-open');
+        clearLines()
+        }
+
+    if (e.code === 'ArrowLeft') {
+        if (curentIndex === 0) {
+            curentIndex = images.length - 1;
+        } else {
+            curentIndex = curentIndex - 1;
+        }
+        changeImages.src = images[curentIndex].original;
+    } 
+    
+    if (e.code === 'ArrowRight') {
+        if (curentIndex +1 > images.length - 1) {
+            curentIndex = 0;
+        } else {
+            curentIndex = curentIndex + 1;
+        }
+        changeImages.src = images[curentIndex].original;
+    };
 };
+
 /*
 1.Создание и рендер разметки по массиву данных и предоставленному шаблону.
 2.Реализация делегирования на галерее ul.js-gallery и получение url большого изображения.
