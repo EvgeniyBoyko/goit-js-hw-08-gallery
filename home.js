@@ -33,7 +33,7 @@ function onClickForModalClose(e) {
         parentPortfolioCard.classList.remove('is-open');
         clearLines()
     }
-    
+
     window.removeEventListener('keydown', onScrollByPressBtn);
 };
 
@@ -63,7 +63,7 @@ function onScrollByPressBtn(e) {
     if (e.code === 'Escape') {
         parentPortfolioCard.classList.remove('is-open');
         clearLines()
-        }
+    }
 
     if (e.code === 'ArrowLeft') {
         if (curentIndex === 0) {
@@ -72,10 +72,10 @@ function onScrollByPressBtn(e) {
             curentIndex -= 1;
         }
         changeImages.src = images[curentIndex].original;
-    } 
-    
+    }
+
     if (e.code === 'ArrowRight') {
-        if (curentIndex +1 > images.length - 1) {
+        if (curentIndex + 1 > images.length - 1) {
             curentIndex = 0;
         } else {
             curentIndex += 1;
