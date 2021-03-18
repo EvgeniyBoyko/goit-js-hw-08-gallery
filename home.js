@@ -58,8 +58,8 @@ function clearLines() {
 
 function onScrollByPressBtn(e) {
     // e.preventDefault();
-    const scrollLeft = e.code === 'ArrowLeft';
     if (parentPortfolioCard.classList.contains('is-open')) {
+        const scrollLeft = e.code === 'ArrowLeft';
         scrollLeft
     }
 };
