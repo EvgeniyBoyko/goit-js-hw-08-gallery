@@ -34,7 +34,7 @@ function onClickForModalClose(e) {
         clearLines()
     }
 
-    window.removeEventListener('keydown', onScrollByPressBtn);
+    window.removeEventListener('keydown', onByPressButton);
 };
 
 function onClickForModalOpen(e) {
@@ -51,7 +51,6 @@ function onClickForModalOpen(e) {
     changeImages.alt = activeTarget.alt;
     curentIndex = +e.target.dataset.index;
 };
-console.log(curentIndex);
 
 
 
