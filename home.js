@@ -7,7 +7,7 @@ const cardsMarkup = createsPortfolioCardsMarkup(images);
 
 portfolioContainer.insertAdjacentHTML('beforeend', cardsMarkup);
 portfolioContainer.addEventListener('click', onClickForModalOpen);
-parentPortfolioCard.addEventListener('click', onClickForModalClose);
+
 
 let curentIndex = null;
 
@@ -39,7 +39,8 @@ function onClickForModalClose(e) {
 
 function onClickForModalOpen(e) {
     e.preventDefault();
-    window.addEventListener('keydown', onScrollByPressBtn);
+    parentPortfolioCard.addEventListener('click', onClickForModalClose);
+    window.addEventListener('keydown', onByPressButton);
     const targetClass = e.target.nodeName === 'IMG';
     if (!targetClass) {
         return;
@@ -59,7 +60,7 @@ function clearLines() {
     changeImages.alt = '';
 };
 
-function onScrollByPressBtn(e) {
+function onByPressButton(e) {
     if (e.code === 'Escape') {
         parentPortfolioCard.classList.remove('is-open');
         clearLines()
