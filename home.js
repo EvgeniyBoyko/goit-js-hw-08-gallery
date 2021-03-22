@@ -75,7 +75,7 @@ function onByPressButton(e) {
     }
 
     if (e.code === 'ArrowRight') {
-        if (curentIndex === images.length - 1) {
+        if (curentIndex ===ё images.length - 1) {
             curentIndex = 0;
         } else {
             curentIndex += 1;
